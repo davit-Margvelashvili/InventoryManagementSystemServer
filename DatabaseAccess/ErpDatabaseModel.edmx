@@ -1,0 +1,954 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="InventoryManagemetSystemDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TblCustomers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartnerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblEmployees">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PrivateNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="BirthDate" Type="date" Nullable="false" />
+          <Property Name="HireDate" Type="date" Nullable="false" />
+          <Property Name="RetirementDate" Type="date" />
+          <Property Name="Salary" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblInventory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblLegalForms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LegalForm" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblPartners">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LegalFormId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PersonalNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TblProductCategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblProducts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="UnitId" Type="int" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblPurchases">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="SupplierId" Type="int" Nullable="false" />
+          <Property Name="TransactionId" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="UnitPrice" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblSales">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="TransactionId" Type="int" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="UnitPrice" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="Quantity" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblSuppliers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartnerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblTransactions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblUnits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_TblCustomers_TblPartners">
+          <End Role="TblPartners" Type="Self.TblPartners" Multiplicity="1" />
+          <End Role="TblCustomers" Type="Self.TblCustomers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblPartners">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblCustomers">
+              <PropertyRef Name="PartnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblInventory_TblProducts">
+          <End Role="TblProducts" Type="Self.TblProducts" Multiplicity="1" />
+          <End Role="TblInventory" Type="Self.TblInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblProducts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblInventory">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblPartners_TblLegalForms">
+          <End Role="TblLegalForms" Type="Self.TblLegalForms" Multiplicity="1" />
+          <End Role="TblPartners" Type="Self.TblPartners" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblLegalForms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblPartners">
+              <PropertyRef Name="LegalFormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblProducts_TblProductCategories">
+          <End Role="TblProductCategories" Type="Self.TblProductCategories" Multiplicity="1" />
+          <End Role="TblProducts" Type="Self.TblProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblProductCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblProducts">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblProducts_TblUnits">
+          <End Role="TblUnits" Type="Self.TblUnits" Multiplicity="1" />
+          <End Role="TblProducts" Type="Self.TblProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblUnits">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblProducts">
+              <PropertyRef Name="UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblPurchases_TblProducts">
+          <End Role="TblProducts" Type="Self.TblProducts" Multiplicity="1" />
+          <End Role="TblPurchases" Type="Self.TblPurchases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblProducts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblPurchases">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblPurchases_TblSuppliers">
+          <End Role="TblSuppliers" Type="Self.TblSuppliers" Multiplicity="1" />
+          <End Role="TblPurchases" Type="Self.TblPurchases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblSuppliers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblPurchases">
+              <PropertyRef Name="SupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblPurchases_TblTransactions">
+          <End Role="TblTransactions" Type="Self.TblTransactions" Multiplicity="1" />
+          <End Role="TblPurchases" Type="Self.TblPurchases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblTransactions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblPurchases">
+              <PropertyRef Name="TransactionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblSales_TblCustomers">
+          <End Role="TblCustomers" Type="Self.TblCustomers" Multiplicity="1" />
+          <End Role="TblSales" Type="Self.TblSales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCustomers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblSales">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblSales_TblProducts">
+          <End Role="TblProducts" Type="Self.TblProducts" Multiplicity="1" />
+          <End Role="TblSales" Type="Self.TblSales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblProducts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblSales">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblSales_TblTransactions">
+          <End Role="TblTransactions" Type="Self.TblTransactions" Multiplicity="1" />
+          <End Role="TblSales" Type="Self.TblSales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblTransactions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblSales">
+              <PropertyRef Name="TransactionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblSuppliers_TblPartners">
+          <End Role="TblPartners" Type="Self.TblPartners" Multiplicity="1" />
+          <End Role="TblSuppliers" Type="Self.TblSuppliers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblPartners">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblSuppliers">
+              <PropertyRef Name="PartnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblTransactions_TblEmployees">
+          <End Role="TblEmployees" Type="Self.TblEmployees" Multiplicity="1" />
+          <End Role="TblTransactions" Type="Self.TblTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEmployees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblTransactions">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblUsers_TblEmployees">
+          <End Role="TblEmployees" Type="Self.TblEmployees" Multiplicity="1" />
+          <End Role="TblUsers" Type="Self.TblUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEmployees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblUsers">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InventoryManagemetSystemDatabaseModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblCustomers" EntityType="Self.TblCustomers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblEmployees" EntityType="Self.TblEmployees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblInventory" EntityType="Self.TblInventory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblLegalForms" EntityType="Self.TblLegalForms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblPartners" EntityType="Self.TblPartners" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblProductCategories" EntityType="Self.TblProductCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblProducts" EntityType="Self.TblProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblPurchases" EntityType="Self.TblPurchases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblSales" EntityType="Self.TblSales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblSuppliers" EntityType="Self.TblSuppliers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblTransactions" EntityType="Self.TblTransactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblUnits" EntityType="Self.TblUnits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblUsers" EntityType="Self.TblUsers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TblCustomers_TblPartners" Association="Self.FK_TblCustomers_TblPartners">
+            <End Role="TblPartners" EntitySet="TblPartners" />
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblInventory_TblProducts" Association="Self.FK_TblInventory_TblProducts">
+            <End Role="TblProducts" EntitySet="TblProducts" />
+            <End Role="TblInventory" EntitySet="TblInventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblPartners_TblLegalForms" Association="Self.FK_TblPartners_TblLegalForms">
+            <End Role="TblLegalForms" EntitySet="TblLegalForms" />
+            <End Role="TblPartners" EntitySet="TblPartners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblProducts_TblProductCategories" Association="Self.FK_TblProducts_TblProductCategories">
+            <End Role="TblProductCategories" EntitySet="TblProductCategories" />
+            <End Role="TblProducts" EntitySet="TblProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblProducts_TblUnits" Association="Self.FK_TblProducts_TblUnits">
+            <End Role="TblUnits" EntitySet="TblUnits" />
+            <End Role="TblProducts" EntitySet="TblProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblPurchases_TblProducts" Association="Self.FK_TblPurchases_TblProducts">
+            <End Role="TblProducts" EntitySet="TblProducts" />
+            <End Role="TblPurchases" EntitySet="TblPurchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblPurchases_TblSuppliers" Association="Self.FK_TblPurchases_TblSuppliers">
+            <End Role="TblSuppliers" EntitySet="TblSuppliers" />
+            <End Role="TblPurchases" EntitySet="TblPurchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblPurchases_TblTransactions" Association="Self.FK_TblPurchases_TblTransactions">
+            <End Role="TblTransactions" EntitySet="TblTransactions" />
+            <End Role="TblPurchases" EntitySet="TblPurchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSales_TblCustomers" Association="Self.FK_TblSales_TblCustomers">
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+            <End Role="TblSales" EntitySet="TblSales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSales_TblProducts" Association="Self.FK_TblSales_TblProducts">
+            <End Role="TblProducts" EntitySet="TblProducts" />
+            <End Role="TblSales" EntitySet="TblSales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSales_TblTransactions" Association="Self.FK_TblSales_TblTransactions">
+            <End Role="TblTransactions" EntitySet="TblTransactions" />
+            <End Role="TblSales" EntitySet="TblSales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSuppliers_TblPartners" Association="Self.FK_TblSuppliers_TblPartners">
+            <End Role="TblPartners" EntitySet="TblPartners" />
+            <End Role="TblSuppliers" EntitySet="TblSuppliers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblTransactions_TblEmployees" Association="Self.FK_TblTransactions_TblEmployees">
+            <End Role="TblEmployees" EntitySet="TblEmployees" />
+            <End Role="TblTransactions" EntitySet="TblTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblUsers_TblEmployees" Association="Self.FK_TblUsers_TblEmployees">
+            <End Role="TblEmployees" EntitySet="TblEmployees" />
+            <End Role="TblUsers" EntitySet="TblUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InventoryManagemetSystemDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TblCustomer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartnerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TblPartner" Relationship="Self.FK_TblCustomers_TblPartners" FromRole="TblCustomers" ToRole="TblPartners" />
+          <NavigationProperty Name="TblSales" Relationship="Self.FK_TblSales_TblCustomers" FromRole="TblCustomers" ToRole="TblSales" />
+        </EntityType>
+        <EntityType Name="TblEmployee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PrivateNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="HireDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="RetirementDate" Type="DateTime" Precision="0" />
+          <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="TblTransactions" Relationship="Self.FK_TblTransactions_TblEmployees" FromRole="TblEmployees" ToRole="TblTransactions" />
+          <NavigationProperty Name="TblUsers" Relationship="Self.FK_TblUsers_TblEmployees" FromRole="TblEmployees" ToRole="TblUsers" />
+        </EntityType>
+        <EntityType Name="TblInventory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
+          <NavigationProperty Name="TblProduct" Relationship="Self.FK_TblInventory_TblProducts" FromRole="TblInventory" ToRole="TblProducts" />
+        </EntityType>
+        <EntityType Name="TblLegalForm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LegalForm" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TblPartners" Relationship="Self.FK_TblPartners_TblLegalForms" FromRole="TblLegalForms" ToRole="TblPartners" />
+        </EntityType>
+        <EntityType Name="TblPartner">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LegalFormId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PersonalNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TblCustomers" Relationship="Self.FK_TblCustomers_TblPartners" FromRole="TblPartners" ToRole="TblCustomers" />
+          <NavigationProperty Name="TblLegalForm" Relationship="Self.FK_TblPartners_TblLegalForms" FromRole="TblPartners" ToRole="TblLegalForms" />
+          <NavigationProperty Name="TblSuppliers" Relationship="Self.FK_TblSuppliers_TblPartners" FromRole="TblPartners" ToRole="TblSuppliers" />
+        </EntityType>
+        <EntityType Name="TblProductCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TblProducts" Relationship="Self.FK_TblProducts_TblProductCategories" FromRole="TblProductCategories" ToRole="TblProducts" />
+        </EntityType>
+        <EntityType Name="TblProduct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="UnitId" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="TblInventories" Relationship="Self.FK_TblInventory_TblProducts" FromRole="TblProducts" ToRole="TblInventory" />
+          <NavigationProperty Name="TblProductCategory" Relationship="Self.FK_TblProducts_TblProductCategories" FromRole="TblProducts" ToRole="TblProductCategories" />
+          <NavigationProperty Name="TblUnit" Relationship="Self.FK_TblProducts_TblUnits" FromRole="TblProducts" ToRole="TblUnits" />
+          <NavigationProperty Name="TblPurchases" Relationship="Self.FK_TblPurchases_TblProducts" FromRole="TblProducts" ToRole="TblPurchases" />
+          <NavigationProperty Name="TblSales" Relationship="Self.FK_TblSales_TblProducts" FromRole="TblProducts" ToRole="TblSales" />
+        </EntityType>
+        <EntityType Name="TblPurchas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="SupplierId" Type="Int32" Nullable="false" />
+          <Property Name="TransactionId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
+          <NavigationProperty Name="TblProduct" Relationship="Self.FK_TblPurchases_TblProducts" FromRole="TblPurchases" ToRole="TblProducts" />
+          <NavigationProperty Name="TblSupplier" Relationship="Self.FK_TblPurchases_TblSuppliers" FromRole="TblPurchases" ToRole="TblSuppliers" />
+          <NavigationProperty Name="TblTransaction" Relationship="Self.FK_TblPurchases_TblTransactions" FromRole="TblPurchases" ToRole="TblTransactions" />
+        </EntityType>
+        <EntityType Name="TblSale">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="TransactionId" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="Quantity" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
+          <NavigationProperty Name="TblCustomer" Relationship="Self.FK_TblSales_TblCustomers" FromRole="TblSales" ToRole="TblCustomers" />
+          <NavigationProperty Name="TblProduct" Relationship="Self.FK_TblSales_TblProducts" FromRole="TblSales" ToRole="TblProducts" />
+          <NavigationProperty Name="TblTransaction" Relationship="Self.FK_TblSales_TblTransactions" FromRole="TblSales" ToRole="TblTransactions" />
+        </EntityType>
+        <EntityType Name="TblSupplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartnerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TblPartner" Relationship="Self.FK_TblSuppliers_TblPartners" FromRole="TblSuppliers" ToRole="TblPartners" />
+          <NavigationProperty Name="TblPurchases" Relationship="Self.FK_TblPurchases_TblSuppliers" FromRole="TblSuppliers" ToRole="TblPurchases" />
+        </EntityType>
+        <EntityType Name="TblTransaction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="TblEmployee" Relationship="Self.FK_TblTransactions_TblEmployees" FromRole="TblTransactions" ToRole="TblEmployees" />
+          <NavigationProperty Name="TblPurchases" Relationship="Self.FK_TblPurchases_TblTransactions" FromRole="TblTransactions" ToRole="TblPurchases" />
+          <NavigationProperty Name="TblSales" Relationship="Self.FK_TblSales_TblTransactions" FromRole="TblTransactions" ToRole="TblSales" />
+        </EntityType>
+        <EntityType Name="TblUnit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Unit" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TblProducts" Relationship="Self.FK_TblProducts_TblUnits" FromRole="TblUnits" ToRole="TblProducts" />
+        </EntityType>
+        <EntityType Name="TblUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TblEmployee" Relationship="Self.FK_TblUsers_TblEmployees" FromRole="TblUsers" ToRole="TblEmployees" />
+        </EntityType>
+        <Association Name="FK_TblCustomers_TblPartners">
+          <End Role="TblPartners" Type="Self.TblPartner" Multiplicity="1" />
+          <End Role="TblCustomers" Type="Self.TblCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblPartners">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblCustomers">
+              <PropertyRef Name="PartnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblSales_TblCustomers">
+          <End Role="TblCustomers" Type="Self.TblCustomer" Multiplicity="1" />
+          <End Role="TblSales" Type="Self.TblSale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCustomers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblSales">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblTransactions_TblEmployees">
+          <End Role="TblEmployees" Type="Self.TblEmployee" Multiplicity="1" />
+          <End Role="TblTransactions" Type="Self.TblTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEmployees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblTransactions">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblUsers_TblEmployees">
+          <End Role="TblEmployees" Type="Self.TblEmployee" Multiplicity="1" />
+          <End Role="TblUsers" Type="Self.TblUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEmployees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblUsers">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblInventory_TblProducts">
+          <End Role="TblProducts" Type="Self.TblProduct" Multiplicity="1" />
+          <End Role="TblInventory" Type="Self.TblInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblProducts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblInventory">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblPartners_TblLegalForms">
+          <End Role="TblLegalForms" Type="Self.TblLegalForm" Multiplicity="1" />
+          <End Role="TblPartners" Type="Self.TblPartner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblLegalForms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblPartners">
+              <PropertyRef Name="LegalFormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblSuppliers_TblPartners">
+          <End Role="TblPartners" Type="Self.TblPartner" Multiplicity="1" />
+          <End Role="TblSuppliers" Type="Self.TblSupplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblPartners">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblSuppliers">
+              <PropertyRef Name="PartnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblProducts_TblProductCategories">
+          <End Role="TblProductCategories" Type="Self.TblProductCategory" Multiplicity="1" />
+          <End Role="TblProducts" Type="Self.TblProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblProductCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblProducts">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblProducts_TblUnits">
+          <End Role="TblUnits" Type="Self.TblUnit" Multiplicity="1" />
+          <End Role="TblProducts" Type="Self.TblProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblUnits">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblProducts">
+              <PropertyRef Name="UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblPurchases_TblProducts">
+          <End Role="TblProducts" Type="Self.TblProduct" Multiplicity="1" />
+          <End Role="TblPurchases" Type="Self.TblPurchas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblProducts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblPurchases">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblSales_TblProducts">
+          <End Role="TblProducts" Type="Self.TblProduct" Multiplicity="1" />
+          <End Role="TblSales" Type="Self.TblSale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblProducts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblSales">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblPurchases_TblSuppliers">
+          <End Role="TblSuppliers" Type="Self.TblSupplier" Multiplicity="1" />
+          <End Role="TblPurchases" Type="Self.TblPurchas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblSuppliers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblPurchases">
+              <PropertyRef Name="SupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblPurchases_TblTransactions">
+          <End Role="TblTransactions" Type="Self.TblTransaction" Multiplicity="1" />
+          <End Role="TblPurchases" Type="Self.TblPurchas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblTransactions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblPurchases">
+              <PropertyRef Name="TransactionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblSales_TblTransactions">
+          <End Role="TblTransactions" Type="Self.TblTransaction" Multiplicity="1" />
+          <End Role="TblSales" Type="Self.TblSale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblTransactions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblSales">
+              <PropertyRef Name="TransactionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ErpDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TblCustomers" EntityType="Self.TblCustomer" />
+          <EntitySet Name="TblEmployees" EntityType="Self.TblEmployee" />
+          <EntitySet Name="TblInventories" EntityType="Self.TblInventory" />
+          <EntitySet Name="TblLegalForms" EntityType="Self.TblLegalForm" />
+          <EntitySet Name="TblPartners" EntityType="Self.TblPartner" />
+          <EntitySet Name="TblProductCategories" EntityType="Self.TblProductCategory" />
+          <EntitySet Name="TblProducts" EntityType="Self.TblProduct" />
+          <EntitySet Name="TblPurchases" EntityType="Self.TblPurchas" />
+          <EntitySet Name="TblSales" EntityType="Self.TblSale" />
+          <EntitySet Name="TblSuppliers" EntityType="Self.TblSupplier" />
+          <EntitySet Name="TblTransactions" EntityType="Self.TblTransaction" />
+          <EntitySet Name="TblUnits" EntityType="Self.TblUnit" />
+          <EntitySet Name="TblUsers" EntityType="Self.TblUser" />
+          <AssociationSet Name="FK_TblCustomers_TblPartners" Association="Self.FK_TblCustomers_TblPartners">
+            <End Role="TblPartners" EntitySet="TblPartners" />
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSales_TblCustomers" Association="Self.FK_TblSales_TblCustomers">
+            <End Role="TblCustomers" EntitySet="TblCustomers" />
+            <End Role="TblSales" EntitySet="TblSales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblTransactions_TblEmployees" Association="Self.FK_TblTransactions_TblEmployees">
+            <End Role="TblEmployees" EntitySet="TblEmployees" />
+            <End Role="TblTransactions" EntitySet="TblTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblUsers_TblEmployees" Association="Self.FK_TblUsers_TblEmployees">
+            <End Role="TblEmployees" EntitySet="TblEmployees" />
+            <End Role="TblUsers" EntitySet="TblUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblInventory_TblProducts" Association="Self.FK_TblInventory_TblProducts">
+            <End Role="TblProducts" EntitySet="TblProducts" />
+            <End Role="TblInventory" EntitySet="TblInventories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblPartners_TblLegalForms" Association="Self.FK_TblPartners_TblLegalForms">
+            <End Role="TblLegalForms" EntitySet="TblLegalForms" />
+            <End Role="TblPartners" EntitySet="TblPartners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSuppliers_TblPartners" Association="Self.FK_TblSuppliers_TblPartners">
+            <End Role="TblPartners" EntitySet="TblPartners" />
+            <End Role="TblSuppliers" EntitySet="TblSuppliers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblProducts_TblProductCategories" Association="Self.FK_TblProducts_TblProductCategories">
+            <End Role="TblProductCategories" EntitySet="TblProductCategories" />
+            <End Role="TblProducts" EntitySet="TblProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblProducts_TblUnits" Association="Self.FK_TblProducts_TblUnits">
+            <End Role="TblUnits" EntitySet="TblUnits" />
+            <End Role="TblProducts" EntitySet="TblProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblPurchases_TblProducts" Association="Self.FK_TblPurchases_TblProducts">
+            <End Role="TblProducts" EntitySet="TblProducts" />
+            <End Role="TblPurchases" EntitySet="TblPurchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSales_TblProducts" Association="Self.FK_TblSales_TblProducts">
+            <End Role="TblProducts" EntitySet="TblProducts" />
+            <End Role="TblSales" EntitySet="TblSales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblPurchases_TblSuppliers" Association="Self.FK_TblPurchases_TblSuppliers">
+            <End Role="TblSuppliers" EntitySet="TblSuppliers" />
+            <End Role="TblPurchases" EntitySet="TblPurchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblPurchases_TblTransactions" Association="Self.FK_TblPurchases_TblTransactions">
+            <End Role="TblTransactions" EntitySet="TblTransactions" />
+            <End Role="TblPurchases" EntitySet="TblPurchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSales_TblTransactions" Association="Self.FK_TblSales_TblTransactions">
+            <End Role="TblTransactions" EntitySet="TblTransactions" />
+            <End Role="TblSales" EntitySet="TblSales" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InventoryManagemetSystemDatabaseModelStoreContainer" CdmEntityContainer="ErpDBEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="InventoryManagemetSystemDatabaseModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblCustomers">
+            <EntityTypeMapping TypeName="InventoryManagemetSystemDatabaseModel.TblCustomer">
+              <MappingFragment StoreEntitySet="TblCustomers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PartnerId" ColumnName="PartnerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblEmployees">
+            <EntityTypeMapping TypeName="InventoryManagemetSystemDatabaseModel.TblEmployee">
+              <MappingFragment StoreEntitySet="TblEmployees">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="PrivateNumber" ColumnName="PrivateNumber" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+                <ScalarProperty Name="RetirementDate" ColumnName="RetirementDate" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblInventories">
+            <EntityTypeMapping TypeName="InventoryManagemetSystemDatabaseModel.TblInventory">
+              <MappingFragment StoreEntitySet="TblInventory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblLegalForms">
+            <EntityTypeMapping TypeName="InventoryManagemetSystemDatabaseModel.TblLegalForm">
+              <MappingFragment StoreEntitySet="TblLegalForms">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LegalForm" ColumnName="LegalForm" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblPartners">
+            <EntityTypeMapping TypeName="InventoryManagemetSystemDatabaseModel.TblPartner">
+              <MappingFragment StoreEntitySet="TblPartners">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LegalFormId" ColumnName="LegalFormId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PersonalNumber" ColumnName="PersonalNumber" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblProductCategories">
+            <EntityTypeMapping TypeName="InventoryManagemetSystemDatabaseModel.TblProductCategory">
+              <MappingFragment StoreEntitySet="TblProductCategories">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblProducts">
+            <EntityTypeMapping TypeName="InventoryManagemetSystemDatabaseModel.TblProduct">
+              <MappingFragment StoreEntitySet="TblProducts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblPurchases">
+            <EntityTypeMapping TypeName="InventoryManagemetSystemDatabaseModel.TblPurchas">
+              <MappingFragment StoreEntitySet="TblPurchases">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblSales">
+            <EntityTypeMapping TypeName="InventoryManagemetSystemDatabaseModel.TblSale">
+              <MappingFragment StoreEntitySet="TblSales">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblSuppliers">
+            <EntityTypeMapping TypeName="InventoryManagemetSystemDatabaseModel.TblSupplier">
+              <MappingFragment StoreEntitySet="TblSuppliers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PartnerId" ColumnName="PartnerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblTransactions">
+            <EntityTypeMapping TypeName="InventoryManagemetSystemDatabaseModel.TblTransaction">
+              <MappingFragment StoreEntitySet="TblTransactions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblUnits">
+            <EntityTypeMapping TypeName="InventoryManagemetSystemDatabaseModel.TblUnit">
+              <MappingFragment StoreEntitySet="TblUnits">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblUsers">
+            <EntityTypeMapping TypeName="InventoryManagemetSystemDatabaseModel.TblUser">
+              <MappingFragment StoreEntitySet="TblUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
